@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Subscription Management</h2>
+<div class="grid">
+  <div class="card">
+    <h3>Current Plan</h3>
+    {% if current %}
+      <p><b>{{ current.plan.name }}</b> ({{ current.status }})</p>
+      <p>Started on {{ current.starts_on }}</p>
+    {% else %}<p>No plan selected.</p>{% endif %}
+  </div>
+  <div class="card">
+    <h3>Switch Plan</h3>
+    <form method="post">
+      <select name="plan_id">
+        {% for p in plans %}
+        <option value="{{ p.id }}">{{ p.name }} - ${{ p.monthly_price }}/month</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Activate Plan</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
