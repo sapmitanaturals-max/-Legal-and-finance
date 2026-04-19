@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Global Tax Profile</h2>
+<div class="card" style="max-width:540px;">
+  <form method="post">
+    <label>GST Number</label>
+    <input name="gst_number" value="{{ profile.gst_number if profile else '' }}">
+    <label>PST Number</label>
+    <input name="pst_number" value="{{ profile.pst_number if profile else '' }}">
+    <label>HST Number</label>
+    <input name="hst_number" value="{{ profile.hst_number if profile else '' }}">
+    <label>Filing Frequency</label>
+    <select name="filing_frequency">
+      <option value="monthly">Monthly</option>
+      <option value="quarterly">Quarterly</option>
+      <option value="yearly">Yearly</option>
+    </select>
+    <button type="submit">Save Tax Profile</button>
+  </form>
+</div>
+{% endblock %}

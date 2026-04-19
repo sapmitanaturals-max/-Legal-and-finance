@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<div class="grid">
+  <div class="card"><b>Date</b><br>{{ kpi.today }}</div>
+  <div class="card"><b>Invoice Count</b><br>{{ kpi.invoice_count }}</div>
+  <div class="card"><b>Revenue</b><br>{{ kpi.revenue }}</div>
+  <div class="card"><b>Receivables</b><br>{{ kpi.receivables }}</div>
+</div>
+
+<div class="grid" style="margin-top:16px;">
+  <div class="card">
+    <h3>Subscription</h3>
+    {% if subscription %}
+      <p>Plan: {{ subscription.plan.name }}</p>
+      <p>Status: {{ subscription.status }}</p>
+      <p>Start: {{ subscription.starts_on }}</p>
+    {% else %}
+      <p>No active subscription.</p>
+    {% endif %}
+  </div>
+  <div class="card">
+    <h3>Recent Ledger Entries</h3>
+    <ul>
+      {% for e in entries %}
+      <li>{{ e.posted_on }} — {{ e.entry_type }} — {{ e.amount }}</li>
+      {% else %}<li>No entries yet.</li>{% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Recent Invoices</h3>
+    <ul>
+      {% for i in invoices %}
+      <li>{{ i.issued_on }} — {{ i.customer_name }} — {{ i.amount_total }} ({{ i.status }})</li>
+      {% else %}<li>No invoices yet.</li>{% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

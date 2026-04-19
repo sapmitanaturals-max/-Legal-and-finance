@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Legal & Finance SaaS</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f7f8fb; color: #243447; }
+    nav { background: #14213d; color: white; padding: 12px 20px; }
+    nav a { color: #fff; margin-right: 14px; text-decoration: none; font-size: 14px; }
+    .container { max-width: 1080px; margin: 20px auto; padding: 0 16px; }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
+    .card { background: #fff; border-radius: 12px; padding: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid #e5e8ec; padding: 8px; text-align: left; }
+    input, select, button { padding: 8px; margin: 4px 0; width: 100%; }
+    button { background: #1f6feb; color: #fff; border: 0; border-radius: 6px; cursor: pointer; }
+    .flash { padding: 8px; border-radius: 6px; background: #e8f3ff; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('users') }}">Users</a>
+    <a href="{{ url_for('subscriptions') }}">Subscriptions</a>
+    <a href="{{ url_for('bookkeeping') }}">Bookkeeping</a>
+    <a href="{{ url_for('invoices') }}">Invoices</a>
+    <a href="{{ url_for('tax') }}">Tax</a>
+    <a href="{{ url_for('audit') }}">Audit</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </nav>
+  <div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
